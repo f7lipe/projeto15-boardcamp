@@ -1,0 +1,25 @@
+{
+  "name": "projeto15-boardcamp",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "API that connects to a SQL Database ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/f7lipe/projeto15-boardcamp.git"
+  },
+  "keywords": [
+    "SQL",
+    "API"
+  ],
+  "author": "Filipe Correia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/f7lipe/projeto15-boardcamp/issues"
+  },
+  "homepage": "https://github.com/f7lipe/projeto15-boardcamp#readme"
+}
