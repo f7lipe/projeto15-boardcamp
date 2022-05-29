@@ -1,9 +1,10 @@
 import { Router } from "express";   
-import { getCustomers, getCustomerById } from "../../controllers/Customer";
+import { getCustomers, getCustomerById, setCustomer } from "../../controllers/Customer";
 
 const customerRouter = Router()
 
 customerRouter.get('/customers', getCustomers)
 customerRouter.get('/customers/:id', getCustomerById)
+customerRouter.post('/customers', setCustomer)
 
 export {customerRouter}
