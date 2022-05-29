@@ -21,5 +21,15 @@
   "bugs": {
     "url": "https://github.com/f7lipe/projeto15-boardcamp/issues"
   },
-  "homepage": "https://github.com/f7lipe/projeto15-boardcamp#readme"
+  "homepage": "https://github.com/f7lipe/projeto15-boardcamp#readme",
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "nodemon": "^2.0.16",
+    "pg": "^8.7.3"
+  }
 }
