@@ -2,7 +2,7 @@ import { connection } from "../../db.js";
 import dayjs from "dayjs";
 import chalk from "chalk";
 import formatRentalResponse from "./formatRentalResponse.js";
-import { rentalsSchema } from "../../schemas/Rental/index.js";
+
 
 async function getRentals(req, res){
     const {customerId, gameId} = req.query;
@@ -95,13 +95,27 @@ async function returnRental(req, res){
 
     res.sendStatus(200)
     console.log("devolvido com sucesso")
-    
+
   } catch (error) {
     console.log('Deu ruim ao fechar a transação', error)
     res.status(422).send(error)
   }
 }
 
-  export {getRentals, setRentals, returnRental }
+async function deletRental(req, res){
+  const {id} = req.params
+
+  try {
+    await connection.query(`DELETE FROM rentals 
+                    WHERE id = $1`, [id])
+
+    res.sendStatus(200)
+    
+  } catch (error) {
+    console.log('Deu ruim ao deletar o aluguel', error)
+    res.status(422).send(error)
+  }
+}
+  export {getRentals, setRentals, returnRental, deletRental }
   
   
