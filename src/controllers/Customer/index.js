@@ -1,5 +1,4 @@
 import { connection } from "../../db.js";
-import { customerSchema } from "../../schemas/Customer/index.js";
 import chalk from "chalk";
 
 async function getCustomers(req, res) {
@@ -46,15 +45,7 @@ async function getCustomerById(req, res) {
 async function setCustomer(req, res) {
     try {
         const customer = req.body;
-        const validation = customerSchema.validate(customer)
-        if (validation.error) return res.sendStatus(400)
-
-        const customer_ = await connection.query(`SELECT id 
-                                               FROM customers 
-                                               WHERE cpf=$1`, [customer.cpf])
-
-        if (customer_.rowCount > 0) return res.sendStatus(409)
-
+        
         await connection.query(`
           INSERT INTO 
             customers (name, phone, cpf, birthday) 
