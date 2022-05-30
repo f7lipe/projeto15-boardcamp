@@ -73,19 +73,18 @@ async function setCustomer(req, res) {
 
 async function updateCustomer(req, res) {
     const { id } = req.params
+    const { name, phone, cpf, birthday } = req.body
 
     if (isNaN(parseInt(id))) return res.sendStatus(400)
-
-
+    
     try {
-
         const customer = await connection.query(`SELECT id 
                                                FROM customers 
                                                WHERE cpf=$1 
-                                               AND id!=$2`, [customer.cpf, id])
-
+                                               AND id!=$2`, [cpf, id])
+        
         if (customer.rowCount > 0) return res.sendStatus(409)
-        const { name, phone, cpf, birthday } = customer
+        
 
         await connection.query(`
       UPDATE customers

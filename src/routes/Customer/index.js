@@ -6,6 +6,6 @@ const customerRouter = Router()
 customerRouter.get('/customers', getCustomers)
 customerRouter.get('/customers/:id', getCustomerById)
 customerRouter.post('/customers', setCustomer)
-customerRouter.put('/customers', updateCustomer)
+customerRouter.put('/customers/:id', updateCustomer)
 
 export {customerRouter}
