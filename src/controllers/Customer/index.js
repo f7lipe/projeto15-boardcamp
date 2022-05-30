@@ -1,5 +1,5 @@
 import { connection } from "../../db.js";
-import { customerSchema } from "../../schemas/Customer";
+import { customerSchema } from "../../schemas/Customer/index.js";
 import chalk from "chalk";
 
 async function getCustomers(req, res) {

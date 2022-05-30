@@ -8,7 +8,7 @@ async function getGames(req, res) {
 
     try {
 
-        if (name) {
+        if (!name) {
             const query = await connection.query(`
         SELECT games.*, categories.name as "categoryName" 
         FROM games
@@ -16,9 +16,9 @@ async function getGames(req, res) {
         ON games."categoryId" = categories.id`)
 
             return res.send(query.rows)
-        } else {
+        }
 
-            const query = await connection.query(`
+        const query = await connection.query(`
         SELECT games.*, categories.name as "categoryName" 
         FROM games
         JOIN categories 
@@ -26,8 +26,8 @@ async function getGames(req, res) {
         WHERE game.name
         ILIKE $1`, [`${name}`])
 
-            return res.send(query.rows)
-        }
+        return res.send(query.rows)
+        
 
     } catch (error) {
         res.sendStatus(500)

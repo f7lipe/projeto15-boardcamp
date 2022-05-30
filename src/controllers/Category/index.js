@@ -1,4 +1,4 @@
-import { categorySchema } from "../../schemas/Category ";
+import { categorySchema } from "../../schemas/Category /index.js";
 import { connection } from "../../db.js";
 import chalk from "chalk";
 
