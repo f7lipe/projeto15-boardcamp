@@ -1,4 +1,5 @@
 import { connection } from "../../db.js";
+import dayjs from "dayjs";
 import { rentalsSchema } from "../../schemas/Rental/index.js";
 
 async function getRentals(req, res){
@@ -10,7 +11,7 @@ async function getRentals(req, res){
                    JOIN categories ON games."categoryId" = categories.id
     `
   
-    let rentals = ''
+    let rentals = null
   
     try {
   
@@ -34,7 +35,44 @@ async function getRentals(req, res){
 }
 
 
-function formatRentalResponse (rentalsArray) {
+async function setRentals(req, res){
+    const {customerId, gameId, daysRented} = req.body
+
+    const rentDate = dayjs().format('YYYY-MM-DD')
+    
+    try {
+      const result = await connection.query(`SELECT * 
+                                             FROM games 
+                                             WHERE id = $1`, [gameId])
+  
+      const originalPrice = result.rows[0].pricePerDay * daysRented
+  
+
+  
+      await db.query(`INSERT INTO rentals ("customerId", "gameId", "rentDate", "daysRented", "returnDate", "originalPrice", "delayFee")
+                      VALUES($1, $2, $3, $4, $5, $6, $7)
+      `, [customerId, 
+          gameId, 
+          rentDate, 
+          daysRented, 
+          null, 
+          originalPrice, 
+          null])
+  
+      res.sendStatus(201);
+  
+      } catch (error) {
+      console.log(chalk.bold.red('Deu ruim para cadastrar o aluguel', error))
+      res.status(422).send(error)
+    }
+}
+
+
+
+  export {getRentals, setRentals}
+  
+  
+  function formatRentalResponse (rentalsArray) {
     return rentalsArray.map(rental => {
   
       const {id, 
@@ -72,6 +110,3 @@ function formatRentalResponse (rentalsArray) {
       )
     })
   }
-
-
-  export {getRentals}
