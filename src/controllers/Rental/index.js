@@ -1,5 +1,6 @@
 import { connection } from "../../db.js";
 import dayjs from "dayjs";
+import chalk from "chalk";
 import { rentalsSchema } from "../../schemas/Rental/index.js";
 
 async function getRentals(req, res){
@@ -49,7 +50,7 @@ async function setRentals(req, res){
   
 
   
-      await db.query(`INSERT INTO rentals ("customerId", "gameId", "rentDate", "daysRented", "returnDate", "originalPrice", "delayFee")
+      await connection.query(`INSERT INTO rentals ("customerId", "gameId", "rentDate", "daysRented", "returnDate", "originalPrice", "delayFee")
                       VALUES($1, $2, $3, $4, $5, $6, $7)
       `, [customerId, 
           gameId, 
